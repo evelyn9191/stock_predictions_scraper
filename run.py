@@ -147,6 +147,8 @@ def apply_formatting(output_file: str, sheetname: str) -> None:
 
     # Add column filters
     ws.auto_filter.ref = ws.dimensions
+    ws.auto_filter.ref = "C:C"
+    ws.auto_filter.add_filter_column(0, ["A+", "A", "A-", "B+", "B"])
 
     # Change format of predictions from string to percentage
     percentage_columns = ["E", "F", "G", "H", "I"]
