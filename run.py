@@ -28,7 +28,7 @@ def check_latest_predictions(file_with_predictions: str) -> bool:
     latest_predictions = datetime.strptime(wb.sheetnames[-1], "%d-%m-%Y").date()
     logging.debug(f"Latest predictions: {latest_predictions}")
 
-    if latest_predictions and today - latest_predictions <= timedelta(days=14):
+    if latest_predictions and today - latest_predictions <= timedelta(days=13):
         return False
 
     return True
