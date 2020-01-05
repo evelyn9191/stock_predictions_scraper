@@ -1,6 +1,6 @@
 # $ docker build . -t wallet-inverstor-parser:latest
 
-FROM python:3.7-slim
+FROM python:3.8-slim
 
 RUN apt-get update && apt-get install
 
