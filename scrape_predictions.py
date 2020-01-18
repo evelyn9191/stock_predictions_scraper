@@ -1,7 +1,9 @@
 import logging
+import random
 import time
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from random import randint
 from shutil import copyfile
 from typing import List
 
@@ -10,6 +12,8 @@ import requests
 
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
+
+from user_agents import user_agent_list
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -24,7 +28,7 @@ def check_latest_predictions(file_with_predictions: str) -> bool:
     latest_predictions = datetime.strptime(wb.sheetnames[-1], "%d-%m-%Y").date()
     logging.debug(f"Latest predictions: {latest_predictions}")
 
-    if latest_predictions and today - latest_predictions <= timedelta(days=13):
+    if latest_predictions and today - latest_predictions <= timedelta(days=29):
         return False
 
     return True
@@ -45,11 +49,8 @@ def get_stock_identifiers(file_with_stocks: str):
 
 def get_webpage(stock_code: str) -> str:
     url = f"https://walletinvestor.com/stock-forecast?currency={stock_code}"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/49.0.2623.112 Safari/537.36"
-    }
+    user_agent = random.choice(user_agent_list)
+    headers = {"User-Agent": user_agent}
 
     response = requests.get(url, headers=headers)
     html = response.text
@@ -143,7 +144,7 @@ def get_stock_predictions(file_with_stocks: str) -> list:
             continue
         stock_row = add_stock_identification(stock, parsed_stock_values)
         predictions.append(stock_row)
-        time.sleep(1)
+        time.sleep(randint(3, 10))
 
     sorted(predictions, key=lambda x: x[1])
 
