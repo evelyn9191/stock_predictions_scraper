@@ -1,5 +1,7 @@
 import logging
+import random
 import time
+from random import randint
 
 import openpyxl as openpyxl
 
@@ -9,14 +11,15 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 
+from user_agents import user_agent_list
+
 logging.getLogger().setLevel(logging.INFO)
 
 
 def initialize_driver() -> WebDriver:
     chrome_options = Options()
-    chrome_options.add_argument(
-        "user-agent=[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36]"
-    )
+    user_agent = random.choice(user_agent_list)
+    chrome_options.add_argument(f"user-agent=[{user_agent}]")
     driver = webdriver.Chrome(".\\chromedrivers\\win.exe", chrome_options=chrome_options)
     return driver
 
@@ -74,7 +77,7 @@ def add_consensus(file_with_predictions: str, sheet_name: str) -> None:
             [f"J{current_index}", analysts_consensus.strip() or unknown_consensus]
         )
         current_index += 1
-        time.sleep(1)
+        time.sleep(randint(3, 10))
     logging.info("...finished scraping consensuses.")
     driver.close()
 
