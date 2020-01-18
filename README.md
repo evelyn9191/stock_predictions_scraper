@@ -16,6 +16,7 @@ The script makes random intervals between web pages scraping, so the approximate
 between 40 and 133 minutes for the predictions scraping and the consensus scraping each.
 
 ## Findings
+### Accuracy of the 14d predictions
 The statistics on the accuracy of the predictions at `www.walletinvestor.com` based on the scraping of the website data
 can be found in `data/predictions.xlsx`. Key findings of the analysis for 14d predictions on randomly chosen stocks:
 
@@ -23,4 +24,5 @@ can be found in `data/predictions.xlsx`. Key findings of the analysis for 14d pr
 2. for the lower ratings the platform tends to predict higher improvement that the real one is,
 3. the platform predictions for 14 days differ significantly from the reality (+-22.20%)
 
+### Correlation between the predictions and the consensus
 No correlation was found between the predictions and the consensuses on Nasdaq webpage either.
