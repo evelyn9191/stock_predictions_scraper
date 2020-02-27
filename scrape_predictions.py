@@ -89,7 +89,7 @@ def _get_performance_prediction(soup: BeautifulSoup, column_number: int) -> floa
         },
     ).get_text()
 
-    clean_prediction = prediction.replace(" ", "").strip("%")
+    clean_prediction = prediction.replace(" ", "").strip("+ %")
 
     return float(clean_prediction) / 100
 
