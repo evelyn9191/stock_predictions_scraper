@@ -13,7 +13,7 @@ import requests
 from bs4 import BeautifulSoup
 from openpyxl import Workbook
 
-from user_agents import user_agent_list
+from scraper.user_agents import user_agent_list
 
 logging.getLogger().setLevel(logging.INFO)
 

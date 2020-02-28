@@ -11,7 +11,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 
-from user_agents import user_agent_list
+from scraper.user_agents import user_agent_list
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -20,7 +20,7 @@ def initialize_driver() -> WebDriver:
     chrome_options = Options()
     user_agent = random.choice(user_agent_list)
     chrome_options.add_argument(f"user-agent=[{user_agent}]")
-    driver = webdriver.Chrome(".\\chromedrivers\\win.exe", chrome_options=chrome_options)
+    driver = webdriver.Chrome("../chromedrivers/win.exe", chrome_options=chrome_options)
     return driver
 
 

@@ -8,8 +8,12 @@ from openpyxl.styles import PatternFill, Alignment
 from openpyxl.styles.differential import DifferentialStyle
 from openpyxl.styles.numbers import FORMAT_PERCENTAGE_00
 
-from scrape_consensus import add_consensus
-from scrape_predictions import check_latest_predictions, get_stock_predictions, write_to_excel
+from scraper.scrape_consensus import add_consensus
+from scraper.scrape_predictions import (
+    check_latest_predictions,
+    get_stock_predictions,
+    write_to_excel,
+)
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -47,7 +51,7 @@ def apply_formatting(output_file: str, sheetname: str) -> None:
 def run_scraper():
     logging.info("Running scraper...")
 
-    file_with_stocks = "data/revolut_stocks.xlsx"
+    file_with_stocks = "../data/revolut_stocks.xlsx"
     file_with_predictions = "data/predictions.xlsx"
     sheet_name = date.today().strftime("%d-%m-%Y")
 
